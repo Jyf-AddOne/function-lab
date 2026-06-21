@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="高中数学函数图形可视化与多函数比较工具" />
+  <title>函数实验室 · 高中数学函数图形</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">ƒ</div>
+        <div>
+          <h1>函数可视化</h1>
+          <p>看见变化，理解函数</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="ghost-button" id="resetView">回到原点</button>
+        <button class="icon-button" id="themeToggle" aria-label="切换主题" title="切换主题">☾</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="panel library-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">LIBRARY</span>
+            <h2>常用函数</h2>
+          </div>
+        </div>
+        <p class="panel-intro">选择函数，将它加入可视化区域</p>
+        <div class="preset-list" id="presetList"></div>
+      </aside>
+
+      <aside class="panel function-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">FUNCTIONS</span>
+            <h2>函数列表</h2>
+          </div>
+          <button class="add-button" id="addFunction" title="添加函数">＋</button>
+        </div>
+
+        <div class="function-list" id="functionList"></div>
+
+        <button class="wide-add" id="wideAdd"><span>＋</span> 添加一个函数</button>
+
+        <div class="syntax-tip">
+          <strong>输入提示</strong>
+          <span>参数可拖动或手动输入。自定义函数支持 sin、cos、tan、sqrt、abs、log、^、pi 和 e</span>
+        </div>
+      </aside>
+
+      <section class="graph-section">
+        <div class="graph-toolbar">
+          <div class="segmented" aria-label="图形工具">
+            <button class="active" data-tool="move" title="拖动画布">↔</button>
+            <button id="zoomIn" title="放大">＋</button>
+            <button id="zoomOut" title="缩小">−</button>
+          </div>
+          <div class="view-readout" id="viewReadout">x: −10 ～ 10</div>
+          <button class="toolbar-button" id="toggleGrid"><span>▦</span> 网格</button>
+          <button class="toolbar-button" id="toggleIntersections"><span>⊗</span> 交点</button>
+        </div>
+
+        <div class="canvas-wrap" id="canvasWrap">
+          <canvas id="graphCanvas"></canvas>
+          <div class="cursor-card" id="cursorCard" hidden></div>
+          <div class="zoom-hint">滚轮缩放 · 拖动平移 · 双击复位</div>
+        </div>
+      </section>
+
+      <aside class="panel compare-panel">
+        <div class="panel-heading compare-heading">
+          <div>
+            <span class="eyebrow">COMPARE</span>
+            <h2>函数比较</h2>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label for="xValue">在同一个 x 下比较</label>
+          <div class="input-with-tag">
+            <span>x=</span>
+            <input id="xValue" type="text" inputmode="decimal" value="1" aria-label="x 的值" />
+          </div>
+        </div>
+
+        <div class="control-group precision-row">
+          <label for="precision">结果精确到</label>
+          <div class="select-wrap">
+            <select id="precision">
+              <option value="0">0 位小数</option>
+              <option value="1">1 位小数</option>
+              <option value="2">2 位小数</option>
+              <option value="3" selected>3 位小数</option>
+              <option value="4">4 位小数</option>
+              <option value="5">5 位小数</option>
+              <option value="6">6 位小数</option>
+              <option value="8">8 位小数</option>
+              <option value="10">10 位小数</option>
+              <option value="12">12 位小数</option>
+              <option value="15">15 位小数</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="compare-button" id="compareButton">开始比较 <span>→</span></button>
+
+        <div class="result-area" id="resultArea">
+          <div class="empty-result">
+            <div class="empty-icon">≷</div>
+            <strong>等待比较</strong>
+            <span>输入 x 后，这里会按函数值从大到小排列</span>
+          </div>
+        </div>
+
+        <div class="observation">
+          <div class="observation-title"><span>✦</span> 观察提示</div>
+          <p id="observationText">试着拖动图像或放大交点附近，观察函数值的变化。</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
